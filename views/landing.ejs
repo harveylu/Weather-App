@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+		
+		<title>Weather App!</title>
+
+		<!-- Loading third party fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+		<!-- Loading main css file -->
+		<link rel="stylesheet" href="stylesheets/style.css">
+		<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+
+		<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
+		<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
+		<!--[if lt IE 9]>
+		<script src="javascripts/ie-support/html5.js"></script>
+		<script src="javascripts/ie-support/respond.js"></script>
+		<![endif]-->
+
+	</head>
+
+
+	<body>
+
+		<div class="site-content">
+			<div class="site-header">
+				<div class="container">
+					<a href="/" class="branding">
+						<img src="images/logo1.png" alt="" class="logo" >
+						<div class="logo-type">
+							<h1 class="site-title">Company name</h1>
+							<small class="site-description">tagline goes here</small>
+						</div>
+					</a>
+
+					<!-- Default snippet for navigation -->
+					<div class="main-navigation">
+						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item current-menu-item"><a href="/">Home</a></li>
+						</ul> <!-- .menu -->
+					</div> <!-- .main-navigation -->
+
+					<div class="mobile-navigation"></div>
+
+				</div>
+			</div> <!-- .site-header -->
+
+			<!--<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">-->
+				<!--<a class="navbar-brand" href="#">Navbar</a>-->
+				<!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">-->
+					<!--<span class="navbar-toggler-icon"></span>-->
+				<!--</button>-->
+
+				<!--<div class="collapse navbar-collapse" id="navbarsExampleDefault">-->
+					<!--<ul class="navbar-nav mr-auto">-->
+						<!--<li class="nav-item active">-->
+							<!--<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
+						<!--</li>-->
+						<!--<li class="nav-item">-->
+							<!--<a class="nav-link" href="#">Link</a>-->
+						<!--</li>-->
+						<!--<li class="nav-item">-->
+							<!--<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
+						<!--</li>-->
+						<!--<li class="nav-item dropdown">-->
+							<!--<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>-->
+							<!--<div class="dropdown-menu" aria-labelledby="dropdown01">-->
+								<!--<a class="dropdown-item" href="#">Action</a>-->
+								<!--<a class="dropdown-item" href="#">Another action</a>-->
+								<!--<a class="dropdown-item" href="#">Something else here</a>-->
+							<!--</div>-->
+						<!--</li>-->
+					<!--</ul>-->
+					<!--<form class="form-inline my-2 my-lg-0">-->
+						<!--<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
+						<!--<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>-->
+					<!--</form>-->
+				<!--</div>-->
+			<!--</nav>-->
+
+			<div class="hero" data-bg-image="images/MTV.jpg">
+				<!--<div class="container">-->
+					<!--<form action="#" class="find-location">-->
+						<!--<input type="text" placeholder="Find your location...">-->
+						<!--<input type="submit" value="Find">-->
+					<!--</form>-->
+
+				<!--</div>-->
+			</div>
+			<%if(record){%>
+            <% var date1 = new Date(record.current_observation.pubDate * 1000);
+				const offsetMs = date1.getTimezoneOffset() * 60 * 1000;
+				const dateLocal = new Date(date1.getTime() - offsetMs);
+				var date2 = dateLocal.toISOString().slice(0, 19).replace(/-/g, "/").replace("T", " ");
+				var mmddyy = date1.toString().slice(4,15);
+				var day = date1.toString().slice(0,4);
+				var mmdd = date1.toString().slice(4,10);
+            %>
+			<div class="forecast-table">
+				<div class="container">
+					<div class="forecast-container">
+						<div class="today forecast">
+							<div class="forecast-header">
+								<div class="day"><%=day%></div>
+								<div class="date"><%= mmdd%></div>
+							</div> <!-- .forecast-header -->
+							<div class="forecast-content">
+								<div class="location"><%= record.location.city%></div>
+								<div class="degree">
+									<div class="num"><%=record.current_observation.condition.temperature%><sup>o</sup>F</div>
+									<div class="forecast-icon">
+										<img src="images/icons/icon-1.svg" alt="" width="240%">
+									</div>	
+								</div>
+								<span>Humidity: <%= record.current_observation.atmosphere.humidity%></span>
+								<span>Wind Speed: <%= record.current_observation.wind.speed%>km/h</span><br>
+								<span>Weather: <%= record.current_observation.condition.text%></span><br>
+								<span>Sunrise: <%= record.current_observation.astronomy.sunrise%></span>
+								<span>Sunset: <%= record.current_observation.astronomy.sunset%></span>
+							</div>
+						</div>
+                        <% for (var i=0; i < record.forecasts.length; i++) { %>
+						<div class="forecast">
+							<div class="forecast-header">
+								<div class="day"><%=record.forecasts[i].day%></div>
+							</div> <!-- .forecast-header -->
+							<div class="forecast-content">
+								<div class="forecast-icon">
+									<% var picindex = record.forecasts[i].code;
+									picindex = picindex%14 + 1;%>
+									<img src="images/icons/icon-<%=picindex%>.svg" alt="images/icons/icon-13.svg" width="90%">
+								</div>
+								<div class="degree"><%= record.forecasts[i].high%><sup>o</sup></div>
+								<small><%= record.forecasts[i].low%><sup>o</sup></small>
+							</div>
+						</div>
+                        <%}%>
+						<!--<div class="forecast">-->
+							<!--<div class="forecast-header">-->
+								<!--<div class="day">Tuesday</div>-->
+							<!--</div> &lt;!&ndash; .forecast-header &ndash;&gt;-->
+							<!--<div class="forecast-content">-->
+								<!--<div class="forecast-icon">-->
+									<!--<img src="images/icons/icon-3.svg" alt="" width=48>-->
+								<!--</div>-->
+								<!--<div class="degree">23<sup>o</sup>C</div>-->
+								<!--<small>18<sup>o</sup></small>-->
+							<!--</div>-->
+						<!--</div>-->
+
+					</div>
+				</div>
+			</div>
+			<%}%>
+
+			<footer class="site-footer">
+				<div class="container">
+
+					<p class="colophon">Copyright 2014 Company name. Designed by Themezy. All rights reserved</p>
+				</div>
+			</footer> <!-- .site-footer -->
+		</div>
+		
+		<script src="javascripts/jquery-1.11.1.min.js"></script>
+		<script src="javascripts/plugins.js"></script>
+		<script src="javascripts/app.js"></script>
+		
+	</body>
+
+</html>
