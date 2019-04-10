@@ -1,5 +1,5 @@
 # Weather-App
-It's a simple weather forecast app. <br>
+It's a weather forecast app. <br>
 To run this application locally, you need to first install [node.js](https://nodejs.org/en/). <br>
 
 * Clone this repo to your local
@@ -12,15 +12,12 @@ There is an instance of the current version of this app hosted [here](https://fr
 ### App Design
 **[Dummy Data]:** There are two sets of dummy data for the weather forecast. One for MountainView only, one for other cities on the list.
 
-**[APIs]:** There are two majors ways to provide data to clients. <br>
-```
-GET request: /?city=Mountain%20View
-```
-<br>
-This will render a web page to display the weather forecast data on the browser.<br>
+**[APIs]:** There are two majors ways to provide data to clients.  
+```GET request: /?city=Mountain%20View```
+This will render a web page to display the weather forecast data on the browser.  
 ```GET request: /Mountain%20View/json```
-<br>
-This request will return a single JSON object to the client.<br>
+This request will return a single JSON object to the client.  
+
 
 **[Default City Choice]:** The default city choice is set to ```Mountain View```. In the future, it could read the location data and/or IP address from users to choose the default city for them. Hitting the root URL of the domain will display the default page, which is ```Mountain View``` if the cookie is empty.
 
