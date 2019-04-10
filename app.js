@@ -24,7 +24,11 @@ app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  var error = {
+      "status": 404,
+      "message": "This is not the page you are looking for."
+  };
+  next(res.render('Myerror', {error: error}));
 });
 
 // error handler

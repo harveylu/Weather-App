@@ -294,7 +294,7 @@ var cityList = [
     "Sunnyvale",
     "Cupertino",
     "Milpitas",
-    "Palo Alto",
+    "Palo Alto"
 ];
 exports.cities = cityList;
 
