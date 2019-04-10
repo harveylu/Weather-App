@@ -1,7 +1,7 @@
 const assert = require('assert');
 var cityController = require("./controllers/cityController.js");
 
-it('city name returned matches the city name in the json data', function() {
+it('City name returned matches the city name in the json data', function() {
     cityController.cityDataRetrieval(null, null, function (error, result){
         if(!error){
             assert.equal(result.city, result.record.location.city);
@@ -28,7 +28,7 @@ it('"Null" query and cookie to get default city', function() {
     })
 });
 
-it('query information has higher priority than cookie', function() {
+it('Query information has higher priority than cookie', function() {
     var query = "San Jose";
     var cookie = "Sunnyvale";
     cityController.cityDataRetrieval(query, cookie, function (error, result){
@@ -40,7 +40,7 @@ it('query information has higher priority than cookie', function() {
     })
 });
 
-it('cookie takes place when query is empty', function() {
+it('Cookie takes place when query is empty', function() {
     var cookie = "Milpitas";
     cityController.cityDataRetrieval(null, cookie, function (error, result){
         if(!error){
@@ -51,7 +51,7 @@ it('cookie takes place when query is empty', function() {
     })
 });
 
-it('city not in the list will return default city', function() {
+it('City not on the list will return default city', function() {
     var cookie = "Tokyo";
     cityController.cityDataRetrieval(null, cookie, function (error, result){
         if(!error){
@@ -60,5 +60,38 @@ it('city not in the list will return default city', function() {
             assert.fail(error.message);
         }
     })
+});
+
+it('Json data request with empty params return error message', function() {
+    cityController.cityJsonData(null, function (error, result){
+        if(!error){
+            assert.fail();
+        } else {
+            assert.equal(error.error, 1);
+        }
+    });
+});
+
+it('Unlisted city json request return error message', function() {
+    var params = "Tokyo";
+    cityController.cityJsonData(params, function (error, result){
+        if(!error){
+            assert.fail();
+        } else {
+            assert.equal(error.error, 1);
+        }
+    })
+});
+
+
+it('Listed city json request return data for the request city', function() {
+    var params = "San Jose";
+    cityController.cityJsonData(params, function (error, result){
+        if(!error){
+            assert.equal(result.location.city, params);
+        } else {
+            assert.fail(error.message);
+        }
+    });
 });
 

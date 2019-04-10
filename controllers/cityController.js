@@ -6,7 +6,6 @@ module.exports.cityDataRetrieval = function(query, cookie, callback){
     var error;
     var reply;
     if(mock){ //mock to retrieve data from Database;
-        error = null;
         reply = {
             "cookie": true,
             "citiesList": mock.cities
@@ -28,8 +27,8 @@ module.exports.cityDataRetrieval = function(query, cookie, callback){
         }
         else{
             reply.title = title +": " +city;
-            mock.other.location.city = city;
             reply.record = mock.other;
+            reply.record.location.city = city;
         }
     }
     else{ // if the request to retrieve data from database fails
@@ -37,7 +36,27 @@ module.exports.cityDataRetrieval = function(query, cookie, callback){
             "status": 505,
             "message": "Error occurred while reaching database."
         };
-        reply = null;
+    }
+    callback(error, reply);
+};
+
+module.exports.cityJsonData = function(params, callback){
+    var error;
+    var reply;
+    if(params == null || !mock.cities.includes(params)){
+        error = {
+            "error": "1",
+            "message": "Data of Request city not found."
+        }
+    }
+    else{
+        if(params == "Mountain View"){
+            reply = mock.mtv;
+        }
+        else{
+            reply = mock.other;
+            reply.location.city = params;
+        }
     }
     callback(error, reply);
 };
