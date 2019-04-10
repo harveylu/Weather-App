@@ -29,7 +29,7 @@ This request will return a single JSON object to the client.
 * Users with cookies can choose to delete the stored cookie and then get redirected to the default Mountain View page.
 * When users who have cookies try to retrieve data from another city, the server would give query data higher priority over cookie value, thus the data of the city in the query will be returned. The server also sets query value to the cookie.
 * There is a "fancy" page implemented with an online template that will display the data from the same city. While jumping between these two pages, the city choice would persist. (Thus, click another URL link won't make the browser forgets about our previous choices)
-* The city choice lives as browser cookies for a month. So even the user closes the browser and opens the web app in 2 weeks, the choice is still remembered.
+* The city choice lives as browser cookies. So even the user closes the browser and opens the web app later, the choice is still remembered.
 
 **[Testing]:** [Mocha](https://mochajs.org/) is used to serve this purpose. There are two majors controller functions that will work to retrieve the right data based on user requests. The following situations are tested in the ```test.js``` file.
 
